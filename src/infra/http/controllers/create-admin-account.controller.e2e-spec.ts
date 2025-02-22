@@ -20,18 +20,20 @@ describe('Create Account (E2E)', () => {
     await app.init()
   })
 
-  test('[POST] /accounts', async () => {
-    const response = await request(app.getHttpServer()).post('/accounts').send({
-      name: 'John Doe',
-      cpf: '752.068.090-80',
-      password: '123456',
-    })
+  test('[POST] /accounts/admin', async () => {
+    const response = await request(app.getHttpServer())
+      .post('/accounts/admin')
+      .send({
+        name: 'John Doe',
+        cpf: '75206809080',
+        password: '123456',
+      })
 
     expect(response.statusCode).toBe(201)
 
     const userOnDatabase = await prisma.user.findUnique({
       where: {
-        cpf: '752.068.090-80',
+        cpf: '75206809080',
       },
     })
 

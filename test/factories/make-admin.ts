@@ -1,12 +1,14 @@
 import { UniqueEntityID } from '@/core/entity/unique-entity-id'
 import { Admin, AdminProps } from '@/domain/delivery/enterprise/entities/admin'
+import { PrismaAdminMapper } from '@/infra/database/prisma/mappers/prisma-admin-mapper'
+import { PrismaService } from '@/infra/database/prisma/prisma.service'
 import { faker } from '@faker-js/faker/locale/pt_BR'
+import { Injectable } from '@nestjs/common'
 
 function generateCPF(): string {
-  const randomNumbers = faker.string.numeric(9) // Gera os 9 primeiros dígitos aleatórios
+  const randomNumbers = faker.string.numeric(9)
   const cpfBase = randomNumbers.split('').map(Number)
 
-  // Função para calcular os dígitos verificadores
   function calculateDigit(cpfArray: number[]): number {
     const sum = cpfArray.reduce(
       (total, num, index) => total + num * (cpfArray.length + 1 - index),
@@ -16,13 +18,11 @@ function generateCPF(): string {
     return remainder < 2 ? 0 : 11 - remainder
   }
 
-  // Calcula os dois últimos dígitos
   const firstDigit = calculateDigit(cpfBase)
   cpfBase.push(firstDigit)
   const secondDigit = calculateDigit(cpfBase)
   cpfBase.push(secondDigit)
 
-  // Retorna o CPF formatado
   return cpfBase.join('')
 }
 
@@ -41,4 +41,19 @@ export function makeAdmin(
   )
 
   return admin
+}
+
+@Injectable()
+export class AdminFactory {
+  constructor(private prisma: PrismaService) {}
+
+  async makePrismaAdmin(data: Partial<AdminProps> = {}): Promise<Admin> {
+    const admin = makeAdmin(data)
+
+    await this.prisma.user.create({
+      data: PrismaAdminMapper.toPrisma(admin),
+    })
+
+    return admin
+  }
 }

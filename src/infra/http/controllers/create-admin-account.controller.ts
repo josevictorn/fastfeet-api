@@ -12,6 +12,7 @@ import { z } from 'zod'
 import { ZodValidationPipe } from '../pipes/zod-validation-pipe'
 import { AdminAlreadyExistsError } from '@/domain/delivery/application/use-cases/erros/admin-already-exists-error'
 import { ApiBody, ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger'
+import { Public } from '@/infra/auth/public'
 
 const createAdminAccountBodySchema = z.object({
   name: z.string(),
@@ -23,6 +24,7 @@ type CreateAdminAccountBodySchema = z.infer<typeof createAdminAccountBodySchema>
 
 @ApiTags('auth')
 @Controller('/accounts/admin')
+@Public()
 export class CreateAdminAccountController {
   constructor(private registerAdmin: RegisterAdminUseCase) {}
 

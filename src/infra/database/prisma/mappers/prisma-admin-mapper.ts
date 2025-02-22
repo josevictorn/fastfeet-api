@@ -1,6 +1,6 @@
 import { UniqueEntityID } from '@/core/entity/unique-entity-id'
 import { Admin } from '@/domain/delivery/enterprise/entities/admin'
-import { Prisma, User as PrismaAdmin } from '@prisma/client'
+import { Prisma, User as PrismaAdmin, UserRole } from '@prisma/client'
 
 export class PrismaAdminMapper {
   static toDomain(raw: PrismaAdmin): Admin {
@@ -17,6 +17,7 @@ export class PrismaAdminMapper {
   static toPrisma(admin: Admin): Prisma.UserUncheckedCreateInput {
     return {
       id: admin.id.toString(),
+      role: UserRole.ADMIN,
       name: admin.name,
       cpf: admin.cpf,
       password: admin.password,

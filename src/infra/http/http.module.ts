@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common'
 import { DatabaseModule } from '../database/database.module'
-import { RegisterAdminUseCase } from '@/domain/delivery/aplication/use-cases/register-admin'
+import { RegisterAdminUseCase } from '@/domain/delivery/application/use-cases/register-admin'
 import { CryptographyModule } from '../cryptography/cryptography.module'
 import { CreateAdminAccountController } from './controllers/create-admin-account.controller'
 

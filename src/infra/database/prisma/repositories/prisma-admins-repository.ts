@@ -1,4 +1,4 @@
-import { AdminsRepository } from '@/domain/delivery/aplication/repositories/admins-repository'
+import { AdminsRepository } from '@/domain/delivery/application/repositories/admins-repository'
 import { Admin } from '@/domain/delivery/enterprise/entities/admin'
 import { PrismaService } from '../prisma.service'
 import { PrismaAdminMapper } from '../mappers/prisma-admin-mapper'

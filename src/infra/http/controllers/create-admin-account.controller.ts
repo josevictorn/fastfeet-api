@@ -1,4 +1,4 @@
-import { RegisterAdminUseCase } from '@/domain/delivery/aplication/use-cases/register-admin'
+import { RegisterAdminUseCase } from '@/domain/delivery/application/use-cases/register-admin'
 import {
   BadRequestException,
   Body,
@@ -10,7 +10,7 @@ import {
 } from '@nestjs/common'
 import { z } from 'zod'
 import { ZodValidationPipe } from '../pipes/zod-validation-pipe'
-import { AdminAlreadyExistsError } from '@/domain/delivery/aplication/use-cases/erros/admin-already-exists-error'
+import { AdminAlreadyExistsError } from '@/domain/delivery/application/use-cases/erros/admin-already-exists-error'
 import { ApiBody, ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger'
 
 const createAdminAccountBodySchema = z.object({

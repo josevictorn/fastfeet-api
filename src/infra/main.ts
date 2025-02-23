@@ -10,6 +10,7 @@ async function bootstrap() {
     .setTitle('FastFeet API')
     .setDescription('An API to controlling orders from a carrier')
     .setVersion('1.0')
+    .addBearerAuth()
     .build()
 
   const documentFactory = () => SwaggerModule.createDocument(app, config)

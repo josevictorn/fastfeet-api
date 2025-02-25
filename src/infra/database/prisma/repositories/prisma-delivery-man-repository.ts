@@ -29,4 +29,8 @@ export class PrismaDeliveryManRepository implements DeliveryManRepository {
       data,
     })
   }
+
+  findById(id: string): Promise<DeliveryMan | null> {
+    throw new Error('Method not implemented.')
+  }
 }

@@ -8,6 +8,8 @@ import { AuthenticateAdminController } from './controllers/authenticate-admin.co
 import { CreateDeliveryManController } from './controllers/create-delivery-man-account.controller'
 import { PermissionsModule } from '../permissions/permissions.module'
 import { RegisterDeliveryManUseCase } from '@/domain/delivery/application/use-cases/register-delivery-man'
+import { GetDeliveryManByIdController } from './controllers/get-delivery-man-by-id.controller'
+import { GetDeliveryManByIdUseCase } from '@/domain/delivery/application/use-cases/get-delivery-man-by-id'
 
 @Module({
   imports: [DatabaseModule, CryptographyModule, PermissionsModule],
@@ -15,11 +17,13 @@ import { RegisterDeliveryManUseCase } from '@/domain/delivery/application/use-ca
     CreateAdminAccountController,
     AuthenticateAdminController,
     CreateDeliveryManController,
+    GetDeliveryManByIdController,
   ],
   providers: [
     RegisterAdminUseCase,
     AuthenticateAdminUseCase,
     RegisterDeliveryManUseCase,
+    GetDeliveryManByIdUseCase,
   ],
 })
 export class HttpModule {}

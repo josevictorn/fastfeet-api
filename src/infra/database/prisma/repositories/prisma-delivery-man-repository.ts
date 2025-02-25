@@ -30,7 +30,17 @@ export class PrismaDeliveryManRepository implements DeliveryManRepository {
     })
   }
 
-  findById(id: string): Promise<DeliveryMan | null> {
-    throw new Error('Method not implemented.')
+  async findById(id: string) {
+    const deliveryMan = await this.prisma.user.findUnique({
+      where: {
+        id,
+      },
+    })
+
+    if (!deliveryMan) {
+      return null
+    }
+
+    return PrismaDeliveryManMapper.toDomain(deliveryMan)
   }
 }

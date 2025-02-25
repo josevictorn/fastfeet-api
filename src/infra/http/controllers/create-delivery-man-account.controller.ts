@@ -56,7 +56,7 @@ export class CreateDeliveryManController {
   @ApiResponse({ status: 201, description: 'Account created successfully.' })
   @ApiResponse({ status: 409, description: 'Account already exists.' })
   @ApiResponse({ status: 401, description: 'Unauthorized.' })
-  @ApiResponse({ status: 403, description: 'Permission denied.' })
+  @ApiResponse({ status: 403, description: 'Access denied.' })
   @ApiResponse({ status: 400, description: 'Invalid data.' })
   @CheckPolicies((ability: AppAbility) =>
     ability.can(Action.Create, 'DeliveryMan'),

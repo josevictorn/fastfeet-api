@@ -3,6 +3,7 @@ import { PrismaService } from '../prisma.service'
 import { DeliveryMan } from '@/domain/delivery/enterprise/entities/delivery-man'
 import { PrismaDeliveryManMapper } from '../mappers/prisma-delivery-man-mapper'
 import { Injectable } from '@nestjs/common'
+import { PaginationParams } from '@/core/repositories/pagination-params'
 
 @Injectable()
 export class PrismaDeliveryManRepository implements DeliveryManRepository {
@@ -42,5 +43,9 @@ export class PrismaDeliveryManRepository implements DeliveryManRepository {
     }
 
     return PrismaDeliveryManMapper.toDomain(deliveryMan)
+  }
+
+  findMany(params: PaginationParams): Promise<DeliveryMan[]> {
+    throw new Error('Method not implemented.')
   }
 }

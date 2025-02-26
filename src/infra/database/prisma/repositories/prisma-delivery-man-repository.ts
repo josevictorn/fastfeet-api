@@ -4,6 +4,7 @@ import { DeliveryMan } from '@/domain/delivery/enterprise/entities/delivery-man'
 import { PrismaDeliveryManMapper } from '../mappers/prisma-delivery-man-mapper'
 import { Injectable } from '@nestjs/common'
 import { PaginationParams } from '@/core/repositories/pagination-params'
+import { UserRole } from '@prisma/client'
 
 @Injectable()
 export class PrismaDeliveryManRepository implements DeliveryManRepository {
@@ -45,7 +46,15 @@ export class PrismaDeliveryManRepository implements DeliveryManRepository {
     return PrismaDeliveryManMapper.toDomain(deliveryMan)
   }
 
-  findMany(params: PaginationParams): Promise<DeliveryMan[]> {
-    throw new Error('Method not implemented.')
+  async findMany({ page }: PaginationParams) {
+    const deliveryMan = await this.prisma.user.findMany({
+      where: {
+        role: UserRole.DELIVERY_MAN,
+      },
+      take: 20,
+      skip: (page - 1) & 20,
+    })
+
+    return deliveryMan.map(PrismaDeliveryManMapper.toDomain)
   }
 }

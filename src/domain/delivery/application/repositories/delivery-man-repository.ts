@@ -6,4 +6,5 @@ export abstract class DeliveryManRepository {
   abstract findById(id: string): Promise<DeliveryMan | null>
   abstract findMany(params: PaginationParams): Promise<DeliveryMan[]>
   abstract create(deliveryMan: DeliveryMan): Promise<void>
+  abstract save(deliveryMan: DeliveryMan): Promise<void>
 }

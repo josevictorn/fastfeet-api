@@ -34,4 +34,10 @@ export class InMemoryDeliveryManRepository implements DeliveryManRepository {
 
     return deliveryMan
   }
+
+  async save(deliveryMan: DeliveryMan) {
+    const itemIndex = this.items.findIndex((item) => item.id === deliveryMan.id)
+
+    this.items[itemIndex] = deliveryMan
+  }
 }

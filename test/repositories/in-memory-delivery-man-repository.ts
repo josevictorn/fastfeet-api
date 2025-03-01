@@ -40,4 +40,10 @@ export class InMemoryDeliveryManRepository implements DeliveryManRepository {
 
     this.items[itemIndex] = deliveryMan
   }
+
+  async delete(deliveryMan: DeliveryMan) {
+    const itemIndex = this.items.findIndex((item) => item.id === deliveryMan.id)
+
+    this.items.splice(itemIndex, 1)
+  }
 }

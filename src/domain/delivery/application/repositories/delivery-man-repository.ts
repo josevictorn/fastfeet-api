@@ -7,4 +7,5 @@ export abstract class DeliveryManRepository {
   abstract findMany(params: PaginationParams): Promise<DeliveryMan[]>
   abstract create(deliveryMan: DeliveryMan): Promise<void>
   abstract save(deliveryMan: DeliveryMan): Promise<void>
+  abstract delete(deliveryMan: DeliveryMan): Promise<void>
 }

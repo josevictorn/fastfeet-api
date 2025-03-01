@@ -3,6 +3,7 @@ import { Admin } from '@/domain/delivery/enterprise/entities/admin'
 import { PrismaService } from '../prisma.service'
 import { PrismaAdminMapper } from '../mappers/prisma-admin-mapper'
 import { Injectable } from '@nestjs/common'
+import { UserRole } from '@prisma/client'
 
 @Injectable()
 export class PrismaAdminsRepository implements AdminsRepository {
@@ -12,6 +13,7 @@ export class PrismaAdminsRepository implements AdminsRepository {
     const admin = await this.prisma.user.findUnique({
       where: {
         cpf,
+        role: UserRole.ADMIN,
       },
     })
 

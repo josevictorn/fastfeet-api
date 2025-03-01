@@ -21,15 +21,19 @@ export class PoliciesGuard implements CanActivate {
         context.getHandler(),
       ) || []
 
-    const request: UserPayload = context.switchToHttp().getRequest().user
+    const request = context.switchToHttp().getRequest()
+
+    const requestUser: UserPayload = request.user
 
     const user = await this.prisma.user.findFirst({
       where: {
-        id: request.sub,
+        id: requestUser.sub,
       },
     })
 
-    const ability = this.abilityFactory.createForUser(user)
+    const requestParam = request.params.id
+
+    const ability = this.abilityFactory.createForUser(user, requestParam)
 
     return policyHandlers.every((handler) =>
       this.execPolicyHandler(handler, ability),

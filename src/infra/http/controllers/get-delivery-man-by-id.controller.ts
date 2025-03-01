@@ -46,7 +46,7 @@ export class GetDeliveryManByIdController {
     const result = await this.getDeliveryManById.execute({ id })
 
     if (result.isLeft()) {
-      throw new BadRequestException()
+      throw new BadRequestException(result.value.message)
     }
 
     return {

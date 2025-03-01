@@ -4,33 +4,33 @@ import { INestApplication } from '@nestjs/common'
 import { Test } from '@nestjs/testing'
 import { hash } from 'bcryptjs'
 import request from 'supertest'
-import { AdminFactory } from 'test/factories/make-admin'
+import { DeliveryManFactory } from 'test/factories/make-delivery-man'
 
-describe('Authenticate Admin (E2E)', () => {
+describe('Authenticate Delivery Man (E2E)', () => {
   let app: INestApplication
-  let adminFactory: AdminFactory
+  let deliveryManFactory: DeliveryManFactory
 
   beforeAll(async () => {
     const moduleRef = await Test.createTestingModule({
       imports: [AppModule, DatabaseModule],
-      providers: [AdminFactory],
+      providers: [DeliveryManFactory],
     }).compile()
 
     app = moduleRef.createNestApplication()
 
-    adminFactory = moduleRef.get(AdminFactory)
+    deliveryManFactory = moduleRef.get(DeliveryManFactory)
 
     await app.init()
   })
 
-  test('[POST] /sessions/admin', async () => {
-    await adminFactory.makePrismaAdmin({
+  test('[POST] /sessions/delivery-man', async () => {
+    await deliveryManFactory.makePrismaDeliveryMan({
       cpf: '75206809080',
       password: await hash('123456', 8),
     })
 
     const response = await request(app.getHttpServer())
-      .post('/sessions/admin')
+      .post('/sessions/delivery-man')
       .send({
         cpf: '75206809080',
         password: '123456',

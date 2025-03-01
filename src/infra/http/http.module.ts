@@ -16,6 +16,8 @@ import { EditDeliveryManController } from './controllers/edit-delivery-man.contr
 import { EditDeliveryManUseCase } from '@/domain/delivery/application/use-cases/edit-delivery-man'
 import { DeleteDeliveryManController } from './controllers/delete-delivery-man.controller'
 import { DeleteDeliveryManUseCase } from '@/domain/delivery/application/use-cases/delete-delivery-man'
+import { AuthenticateDeliveryManController } from './controllers/authenticate-delivery-man.controller'
+import { AuthenticateDeliveryManUseCase } from '@/domain/delivery/application/use-cases/authenticate-delivery-man'
 
 @Module({
   imports: [DatabaseModule, CryptographyModule, PermissionsModule],
@@ -23,6 +25,7 @@ import { DeleteDeliveryManUseCase } from '@/domain/delivery/application/use-case
     CreateAdminAccountController,
     AuthenticateAdminController,
     CreateDeliveryManController,
+    AuthenticateDeliveryManController,
     GetDeliveryManByIdController,
     FetchDeliveryManController,
     EditDeliveryManController,
@@ -32,6 +35,7 @@ import { DeleteDeliveryManUseCase } from '@/domain/delivery/application/use-case
     RegisterAdminUseCase,
     AuthenticateAdminUseCase,
     RegisterDeliveryManUseCase,
+    AuthenticateDeliveryManUseCase,
     GetDeliveryManByIdUseCase,
     FetchDeliveryManUseCase,
     EditDeliveryManUseCase,

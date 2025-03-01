@@ -32,6 +32,17 @@ export class PrismaDeliveryManRepository implements DeliveryManRepository {
     })
   }
 
+  async save(deliveryMan: DeliveryMan): Promise<void> {
+    const data = PrismaDeliveryManMapper.toPrisma(deliveryMan)
+
+    await this.prisma.user.update({
+      where: {
+        id: data.id,
+      },
+      data,
+    })
+  }
+
   async findById(id: string) {
     const deliveryMan = await this.prisma.user.findUnique({
       where: {

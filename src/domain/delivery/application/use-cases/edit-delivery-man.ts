@@ -3,6 +3,7 @@ import { DeliveryManRepository } from '../repositories/delivery-man-repository'
 import { DeliveryManNotFoundError } from './erros/delivery-man-not-found-error'
 import { NotAllowedError } from '@/core/errors/errors/not-allowed-error'
 import { DeliveryMan } from '../../enterprise/entities/delivery-man'
+import { Injectable } from '@nestjs/common'
 
 interface EditDeliveryManUseCaseRequest {
   deliveryManId: string
@@ -17,6 +18,7 @@ type EditDeliveryManUseCaseResponse = Either<
   }
 >
 
+@Injectable()
 export class EditDeliveryManUseCase {
   constructor(private deliveryManRepository: DeliveryManRepository) {}
 

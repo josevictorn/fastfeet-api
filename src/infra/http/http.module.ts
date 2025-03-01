@@ -12,6 +12,8 @@ import { GetDeliveryManByIdController } from './controllers/get-delivery-man-by-
 import { GetDeliveryManByIdUseCase } from '@/domain/delivery/application/use-cases/get-delivery-man-by-id'
 import { FetchDeliveryManController } from './controllers/fetch-delivery-man.controller'
 import { FetchDeliveryManUseCase } from '@/domain/delivery/application/use-cases/fetch-delivery-man'
+import { EditDeliveryManController } from './controllers/edit-delivery-man.controller'
+import { EditDeliveryManUseCase } from '@/domain/delivery/application/use-cases/edit-delivery-man'
 
 @Module({
   imports: [DatabaseModule, CryptographyModule, PermissionsModule],
@@ -21,6 +23,7 @@ import { FetchDeliveryManUseCase } from '@/domain/delivery/application/use-cases
     CreateDeliveryManController,
     GetDeliveryManByIdController,
     FetchDeliveryManController,
+    EditDeliveryManController,
   ],
   providers: [
     RegisterAdminUseCase,
@@ -28,6 +31,7 @@ import { FetchDeliveryManUseCase } from '@/domain/delivery/application/use-cases
     RegisterDeliveryManUseCase,
     GetDeliveryManByIdUseCase,
     FetchDeliveryManUseCase,
+    EditDeliveryManUseCase,
   ],
 })
 export class HttpModule {}

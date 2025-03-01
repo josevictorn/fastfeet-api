@@ -68,4 +68,14 @@ export class PrismaDeliveryManRepository implements DeliveryManRepository {
 
     return deliveryMan.map(PrismaDeliveryManMapper.toDomain)
   }
+
+  async delete(deliveryMan: DeliveryMan): Promise<void> {
+    const data = PrismaDeliveryManMapper.toPrisma(deliveryMan)
+
+    await this.prisma.user.delete({
+      where: {
+        id: data.id,
+      },
+    })
+  }
 }

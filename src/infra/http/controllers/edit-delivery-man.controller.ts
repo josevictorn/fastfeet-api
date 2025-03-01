@@ -12,7 +12,7 @@ import {
 import { z } from 'zod'
 import { ZodValidationPipe } from '../pipes/zod-validation-pipe'
 import { DeliveryManNotFoundError } from '@/domain/delivery/application/use-cases/erros/delivery-man-not-found-error'
-import { ApiBearerAuth, ApiBody, ApiTags } from '@nestjs/swagger'
+import { ApiBearerAuth, ApiBody, ApiOperation, ApiTags } from '@nestjs/swagger'
 import { PoliciesGuard } from '@/infra/permissions/policies.guard'
 import { CheckPolicies } from '@/infra/permissions/policy.decorator'
 import { Action, AppAbility } from '@/infra/permissions/ability.factory'
@@ -34,6 +34,7 @@ export class EditDeliveryManController {
 
   @Patch()
   @HttpCode(204)
+  @ApiOperation({ summary: 'Edit a delivery man data' })
   @ApiBody({
     description: 'Data for delivery man account edit',
     schema: {

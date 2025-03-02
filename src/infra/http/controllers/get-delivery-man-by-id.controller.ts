@@ -27,7 +27,7 @@ export class GetDeliveryManByIdController {
   @Get()
   @ApiOperation({ summary: 'Get a delivery man data' })
   @ApiResponse({
-    status: 201,
+    status: 200,
     schema: {
       type: 'object',
       properties: {

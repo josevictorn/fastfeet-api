@@ -20,6 +20,8 @@ import { AuthenticateDeliveryManController } from './controllers/authenticate-de
 import { AuthenticateDeliveryManUseCase } from '@/domain/delivery/application/use-cases/authenticate-delivery-man'
 import { CreateRecipientContoller } from './controllers/create-recipient.controller'
 import { CreateRecipientUseCase } from '@/domain/delivery/application/use-cases/create-recipient'
+import { GetRecipientByIdController } from './controllers/get-recipient-by-id.controller'
+import { GetRecipientByIdUseCase } from '@/domain/delivery/application/use-cases/get-recipient-by-id'
 
 @Module({
   imports: [DatabaseModule, CryptographyModule, PermissionsModule],
@@ -33,6 +35,7 @@ import { CreateRecipientUseCase } from '@/domain/delivery/application/use-cases/
     EditDeliveryManController,
     DeleteDeliveryManController,
     CreateRecipientContoller,
+    GetRecipientByIdController,
   ],
   providers: [
     RegisterAdminUseCase,
@@ -44,6 +47,7 @@ import { CreateRecipientUseCase } from '@/domain/delivery/application/use-cases/
     EditDeliveryManUseCase,
     DeleteDeliveryManUseCase,
     CreateRecipientUseCase,
+    GetRecipientByIdUseCase,
   ],
 })
 export class HttpModule {}

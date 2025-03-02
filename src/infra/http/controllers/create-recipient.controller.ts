@@ -36,9 +36,9 @@ const createRecipientBodySchema = z.object({
 
 type CreateRecipientBodySchema = z.infer<typeof createRecipientBodySchema>
 
-@ApiTags('recipient')
+@ApiTags('recipients')
 @ApiBearerAuth()
-@Controller('/recipient')
+@Controller('/recipients')
 @UsePipes(new ZodValidationPipe(createRecipientBodySchema))
 export class CreateRecipientContoller {
   constructor(private createRecipient: CreateRecipientUseCase) {}

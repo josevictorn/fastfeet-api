@@ -38,7 +38,7 @@ describe('Create Recipient (E2E)', () => {
     const accessToken = jwt.sign({ sub: user.id.toString() })
 
     const response = await request(app.getHttpServer())
-      .post('/recipient')
+      .post('/recipients')
       .set('Authorization', `Bearer ${accessToken}`)
       .send({
         name: 'John Doe',
@@ -67,7 +67,7 @@ describe('Create Recipient (E2E)', () => {
     const accessToken = jwt.sign({ sub: user.id.toString() })
 
     const response = await request(app.getHttpServer())
-      .post('/recipient')
+      .post('/recipients')
       .set('Authorization', `Bearer ${accessToken}`)
       .send({
         name: faker.person.fullName(),

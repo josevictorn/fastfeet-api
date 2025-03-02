@@ -12,14 +12,20 @@ import {
 import { z } from 'zod'
 import { ZodValidationPipe } from '../pipes/zod-validation-pipe'
 import { DeliveryManNotFoundError } from '@/domain/delivery/application/use-cases/erros/delivery-man-not-found-error'
-import { ApiBearerAuth, ApiBody, ApiOperation, ApiTags } from '@nestjs/swagger'
+import {
+  ApiBearerAuth,
+  ApiBody,
+  ApiOperation,
+  ApiResponse,
+  ApiTags,
+} from '@nestjs/swagger'
 import { PoliciesGuard } from '@/infra/permissions/policies.guard'
 import { CheckPolicies } from '@/infra/permissions/policy.decorator'
 import { Action, AppAbility } from '@/infra/permissions/ability.factory'
 
 const editDeliveryManBodySchema = z.object({
-  name: z.string(),
-  cpf: z.string(),
+  name: z.string().optional(),
+  cpf: z.string().optional(),
 })
 
 type EditDeliveryManBodySchema = z.infer<typeof editDeliveryManBodySchema>
@@ -36,16 +42,22 @@ export class EditDeliveryManController {
   @HttpCode(204)
   @ApiOperation({ summary: 'Edit a delivery man data' })
   @ApiBody({
-    description: 'Data for delivery man account edit',
+    description: 'Data for editing the delivery man',
     schema: {
       type: 'object',
       properties: {
         name: { type: 'string', example: 'João da Silva' },
         cpf: { type: 'string', example: '12345678900' },
       },
-      required: ['name', 'cpf'],
     },
   })
+  @ApiResponse({
+    status: 204,
+    description: 'Delivery man edited successfully.',
+  })
+  @ApiResponse({ status: 404, description: 'Delivery man not found.' })
+  @ApiResponse({ status: 401, description: 'Unauthorized.' })
+  @ApiResponse({ status: 403, description: 'Access denied.' })
   @UseGuards(PoliciesGuard)
   @CheckPolicies((ability: AppAbility) =>
     ability.can(Action.Update, 'DeliveryMan'),

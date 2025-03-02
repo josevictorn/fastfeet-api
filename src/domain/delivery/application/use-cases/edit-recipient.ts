@@ -4,6 +4,7 @@ import { DeliveryManNotFoundError } from './erros/delivery-man-not-found-error'
 import { Either, left, right } from '@/core/either'
 import { RecipientsRepository } from '../repositories/recipients-repository'
 import { RecipientNotFoundError } from './erros/recipient-not-found-error'
+import { Injectable } from '@nestjs/common'
 
 interface EditRecipientUseCaseRequest {
   recipientId: string
@@ -24,6 +25,7 @@ type EditRecipientUseCaseResponse = Either<
   }
 >
 
+@Injectable()
 export class EditRecipientUseCase {
   constructor(private recipientsRepository: RecipientsRepository) {}
 

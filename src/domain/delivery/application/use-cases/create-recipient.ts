@@ -2,6 +2,7 @@ import { Either, left, right } from '@/core/either'
 import { RecipientsRepository } from '../repositories/recipients-repository'
 import { RecipientAlreadyExistsError } from './erros/recipient-already-exists-erros'
 import { Recipient } from '../../enterprise/entities/recipent'
+import { Injectable } from '@nestjs/common'
 
 interface CreateRecipientUseCaseRequest {
   name: string
@@ -9,6 +10,7 @@ interface CreateRecipientUseCaseRequest {
   street: string
   number: number
   complement?: string | null
+  city: string
   state: string
   zipCode: string
 }
@@ -20,6 +22,7 @@ type CreateRecipientUseCaseResponse = Either<
   }
 >
 
+@Injectable()
 export class CreateRecipientUseCase {
   constructor(private repicientRepository: RecipientsRepository) {}
 
@@ -29,6 +32,7 @@ export class CreateRecipientUseCase {
     street,
     number,
     complement,
+    city,
     state,
     zipCode,
   }: CreateRecipientUseCaseRequest): Promise<CreateRecipientUseCaseResponse> {
@@ -45,6 +49,7 @@ export class CreateRecipientUseCase {
       street,
       number,
       complement,
+      city,
       state,
       zipCode,
     })

@@ -7,6 +7,7 @@ export interface RecipientProps {
   street: string
   number: number
   complement?: string | null
+  city: string
   state: string
   zipCode: string
 }
@@ -30,6 +31,10 @@ export class Recipient extends Entity<RecipientProps> {
 
   get complement() {
     return this.props.complement
+  }
+
+  get city() {
+    return this.props.city
   }
 
   get state() {
@@ -58,6 +63,10 @@ export class Recipient extends Entity<RecipientProps> {
 
   set complement(complement: string | null | undefined) {
     this.props.complement = complement
+  }
+
+  set city(city: string) {
+    this.props.city = city
   }
 
   set state(state: string) {

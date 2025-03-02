@@ -18,6 +18,8 @@ import { DeleteDeliveryManController } from './controllers/delete-delivery-man.c
 import { DeleteDeliveryManUseCase } from '@/domain/delivery/application/use-cases/delete-delivery-man'
 import { AuthenticateDeliveryManController } from './controllers/authenticate-delivery-man.controller'
 import { AuthenticateDeliveryManUseCase } from '@/domain/delivery/application/use-cases/authenticate-delivery-man'
+import { CreateRecipientContoller } from './controllers/create-recipient.controller'
+import { CreateRecipientUseCase } from '@/domain/delivery/application/use-cases/create-recipient'
 
 @Module({
   imports: [DatabaseModule, CryptographyModule, PermissionsModule],
@@ -30,6 +32,7 @@ import { AuthenticateDeliveryManUseCase } from '@/domain/delivery/application/us
     FetchDeliveryManController,
     EditDeliveryManController,
     DeleteDeliveryManController,
+    CreateRecipientContoller,
   ],
   providers: [
     RegisterAdminUseCase,
@@ -40,6 +43,7 @@ import { AuthenticateDeliveryManUseCase } from '@/domain/delivery/application/us
     FetchDeliveryManUseCase,
     EditDeliveryManUseCase,
     DeleteDeliveryManUseCase,
+    CreateRecipientUseCase,
   ],
 })
 export class HttpModule {}

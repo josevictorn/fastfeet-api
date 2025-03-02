@@ -20,6 +20,7 @@ describe('Create Recipient', () => {
       email: 'johndoe@email.com',
       street: faker.location.street(),
       number: faker.number.int(10000),
+      city: faker.location.city(),
       state: faker.location.state(),
       zipCode: faker.location.zipCode(),
     })
@@ -36,6 +37,7 @@ describe('Create Recipient', () => {
       email: 'johndoe@email.com',
       street: faker.location.street(),
       number: faker.number.int(10000),
+      city: faker.location.city(),
       state: faker.location.state(),
       zipCode: faker.location.zipCode(),
     })
@@ -45,6 +47,7 @@ describe('Create Recipient', () => {
       email: 'johndoe@email.com',
       street: faker.location.street(),
       number: faker.number.int(10000),
+      city: faker.location.city(),
       state: faker.location.state(),
       zipCode: faker.location.zipCode(),
     })

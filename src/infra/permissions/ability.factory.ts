@@ -17,7 +17,7 @@ export enum Action {
   Delete = 'delete',
 }
 
-export type Subjects = 'DeliveryMan' | 'all'
+export type Subjects = 'DeliveryMan' | 'Recipient' | 'all'
 
 export type AppAbility = MongoAbility<[Action, Subjects]>
 
@@ -28,6 +28,7 @@ export class AbilityFactory {
 
     if (user.role === UserRole.ADMIN) {
       can(Action.Manage, 'DeliveryMan')
+      can(Action.Manage, 'Recipient')
     } else if (
       user.role === UserRole.DELIVERY_MAN &&
       requestParam === user.id

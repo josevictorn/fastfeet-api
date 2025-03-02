@@ -27,3 +27,17 @@ model User {
 
   @@map("users")
 }
+
+model Recipient {
+  id         String  @id @default(uuid())
+  name       String
+  email      String  @unique
+  street     String
+  complement String?
+  number     Int
+  city       String
+  state      String
+  zipCode    String
+
+  @@map("recipients")
+}

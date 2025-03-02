@@ -1,3 +1,4 @@
+import { PaginationParams } from '@/core/repositories/pagination-params'
 import { RecipientsRepository } from '@/domain/delivery/application/repositories/recipients-repository'
 import { Recipient } from '@/domain/delivery/enterprise/entities/recipent'
 
@@ -24,6 +25,12 @@ export class InMemoryRecipientsRepository implements RecipientsRepository {
     }
 
     return recipient
+  }
+
+  async findMany({ page }: PaginationParams) {
+    const recipients = this.items.slice((page - 1) * 20, page * 20)
+
+    return recipients
   }
 
   async create(recipient: Recipient) {

@@ -3,6 +3,7 @@ import { UniqueEntityID } from '@/core/entity/unique-entity-id'
 
 export interface RecipientProps {
   name: string
+  email: string
   street: string
   number: number
   complement?: string | null
@@ -12,51 +13,59 @@ export interface RecipientProps {
 
 export class Recipient extends Entity<RecipientProps> {
   get name() {
-    return this.name
+    return this.props.name
+  }
+
+  get email() {
+    return this.props.email
   }
 
   get street() {
-    return this.street
+    return this.props.street
   }
 
   get number() {
-    return this.number
+    return this.props.number
   }
 
   get complement() {
-    return this.complement
+    return this.props.complement
   }
 
   get state() {
-    return this.state
+    return this.props.state
   }
 
   get zipCode() {
-    return this.zipCode
+    return this.props.zipCode
   }
 
   set name(name: string) {
-    this.name = name
+    this.props.name = name
+  }
+
+  set email(email: string) {
+    this.props.email = email
   }
 
   set street(street: string) {
-    this.street = street
+    this.props.street = street
   }
 
   set number(number: number) {
-    this.number = number
+    this.props.number = number
   }
 
-  set complement(complement: string) {
-    this.name = complement
+  set complement(complement: string | null | undefined) {
+    this.props.complement = complement
   }
 
   set state(state: string) {
-    this.name = state
+    this.props.state = state
   }
 
   set zipCode(zipCode: string) {
-    this.name = zipCode
+    this.props.zipCode = zipCode
   }
 
   static create(props: RecipientProps, id?: UniqueEntityID) {

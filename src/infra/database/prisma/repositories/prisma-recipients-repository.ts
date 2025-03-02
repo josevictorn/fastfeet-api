@@ -53,4 +53,14 @@ export class PrismaRecipientsRepository implements RecipientsRepository {
       data,
     })
   }
+
+  async delete(recipient: Recipient) {
+    const data = PrismaRecipientMapper.toPrisma(recipient)
+
+    await this.prisma.recipient.delete({
+      where: {
+        id: data.id,
+      },
+    })
+  }
 }

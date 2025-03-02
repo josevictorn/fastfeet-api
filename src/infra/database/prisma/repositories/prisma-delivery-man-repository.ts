@@ -10,7 +10,7 @@ import { UserRole } from '@prisma/client'
 export class PrismaDeliveryManRepository implements DeliveryManRepository {
   constructor(private prisma: PrismaService) {}
 
-  async findByCpf(cpf: string): Promise<DeliveryMan | null> {
+  async findByCpf(cpf: string) {
     const deliveryMan = await this.prisma.user.findUnique({
       where: {
         cpf,
@@ -25,7 +25,7 @@ export class PrismaDeliveryManRepository implements DeliveryManRepository {
     return PrismaDeliveryManMapper.toDomain(deliveryMan)
   }
 
-  async create(deliveryMan: DeliveryMan): Promise<void> {
+  async create(deliveryMan: DeliveryMan) {
     const data = PrismaDeliveryManMapper.toPrisma(deliveryMan)
 
     await this.prisma.user.create({
@@ -33,7 +33,7 @@ export class PrismaDeliveryManRepository implements DeliveryManRepository {
     })
   }
 
-  async save(deliveryMan: DeliveryMan): Promise<void> {
+  async save(deliveryMan: DeliveryMan) {
     const data = PrismaDeliveryManMapper.toPrisma(deliveryMan)
 
     await this.prisma.user.update({
@@ -72,7 +72,7 @@ export class PrismaDeliveryManRepository implements DeliveryManRepository {
     return deliveryMan.map(PrismaDeliveryManMapper.toDomain)
   }
 
-  async delete(deliveryMan: DeliveryMan): Promise<void> {
+  async delete(deliveryMan: DeliveryMan) {
     const data = PrismaDeliveryManMapper.toPrisma(deliveryMan)
 
     await this.prisma.user.delete({

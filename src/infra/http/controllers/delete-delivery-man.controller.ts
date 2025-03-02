@@ -8,7 +8,12 @@ import {
   UseGuards,
 } from '@nestjs/common'
 import { DeliveryManNotFoundError } from '@/domain/delivery/application/use-cases/erros/delivery-man-not-found-error'
-import { ApiBearerAuth, ApiOperation, ApiTags } from '@nestjs/swagger'
+import {
+  ApiBearerAuth,
+  ApiOperation,
+  ApiResponse,
+  ApiTags,
+} from '@nestjs/swagger'
 import { PoliciesGuard } from '@/infra/permissions/policies.guard'
 import { CheckPolicies } from '@/infra/permissions/policy.decorator'
 import { Action, AppAbility } from '@/infra/permissions/ability.factory'
@@ -23,6 +28,13 @@ export class DeleteDeliveryManController {
   @Delete()
   @HttpCode(204)
   @ApiOperation({ summary: 'Delete a delivery man' })
+  @ApiResponse({
+    status: 204,
+    description: 'Delivery man deleted successfully.',
+  })
+  @ApiResponse({ status: 401, description: 'Unauthorized.' })
+  @ApiResponse({ status: 403, description: 'Access denied.' })
+  @ApiResponse({ status: 404, description: 'Delivery man not found.' })
   @UseGuards(PoliciesGuard)
   @CheckPolicies((ability: AppAbility) =>
     ability.can(Action.Delete, 'DeliveryMan'),

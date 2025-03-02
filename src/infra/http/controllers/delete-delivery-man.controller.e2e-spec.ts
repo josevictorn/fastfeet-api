@@ -46,7 +46,7 @@ describe('Delete Delivery Man Account (E2E)', () => {
 
     const userOnDatabase = await prisma.user.findUnique({
       where: {
-        cpf: '75206809081',
+        cpf: deliveryMan.cpf,
       },
     })
 

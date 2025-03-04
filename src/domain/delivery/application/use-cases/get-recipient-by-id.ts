@@ -1,6 +1,6 @@
 import { Either, left, right } from '@/core/either'
 import { RecipientNotFoundError } from './erros/recipient-not-found-error'
-import { Recipient } from '../../enterprise/entities/recipent'
+import { Recipient } from '../../enterprise/entities/recipient'
 import { Injectable } from '@nestjs/common'
 import { RecipientsRepository } from '../repositories/recipients-repository'
 

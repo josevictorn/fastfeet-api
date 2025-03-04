@@ -1,7 +1,7 @@
 import { Either, left, right } from '@/core/either'
 import { RecipientsRepository } from '../repositories/recipients-repository'
 import { RecipientAlreadyExistsError } from './erros/recipient-already-exists-erros'
-import { Recipient } from '../../enterprise/entities/recipent'
+import { Recipient } from '../../enterprise/entities/recipient'
 import { Injectable } from '@nestjs/common'
 
 interface CreateRecipientUseCaseRequest {

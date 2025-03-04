@@ -1,5 +1,5 @@
 import { NotAllowedError } from '@/core/errors/errors/not-allowed-error'
-import { Recipient } from '../../enterprise/entities/recipent'
+import { Recipient } from '../../enterprise/entities/recipient'
 import { DeliveryManNotFoundError } from './erros/delivery-man-not-found-error'
 import { Either, left, right } from '@/core/either'
 import { RecipientsRepository } from '../repositories/recipients-repository'

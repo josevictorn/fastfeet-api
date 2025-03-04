@@ -1,5 +1,5 @@
 import { PaginationParams } from '@/core/repositories/pagination-params'
-import { Recipient } from '../../enterprise/entities/recipent'
+import { Recipient } from '../../enterprise/entities/recipient'
 
 export abstract class RecipientsRepository {
   abstract findByEmail(email: string): Promise<Recipient | null>

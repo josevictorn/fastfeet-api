@@ -1,5 +1,5 @@
 import { UniqueEntityID } from '@/core/entity/unique-entity-id'
-import { Recipient } from '@/domain/delivery/enterprise/entities/recipent'
+import { Recipient } from '@/domain/delivery/enterprise/entities/recipient'
 import { Prisma, Recipient as PrismaRecipient } from '@prisma/client'
 
 export class PrismaRecipientMapper {

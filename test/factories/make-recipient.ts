@@ -2,7 +2,7 @@ import { UniqueEntityID } from '@/core/entity/unique-entity-id'
 import {
   Recipient,
   RecipientProps,
-} from '@/domain/delivery/enterprise/entities/recipent'
+} from '@/domain/delivery/enterprise/entities/recipient'
 import { PrismaRecipientMapper } from '@/infra/database/prisma/mappers/prisma-recipients-mapper'
 import { PrismaService } from '@/infra/database/prisma/prisma.service'
 import { faker } from '@faker-js/faker/locale/pt_BR'

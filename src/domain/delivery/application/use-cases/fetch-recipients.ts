@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common'
 import { RecipientsRepository } from '../repositories/recipients-repository'
-import { Recipient } from '../../enterprise/entities/recipent'
+import { Recipient } from '../../enterprise/entities/recipient'
 import { Either, right } from '@/core/either'
 
 interface FetchRecipientsUseCaseRequest {

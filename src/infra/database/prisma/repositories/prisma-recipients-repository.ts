@@ -1,6 +1,6 @@
 import { RecipientsRepository } from '@/domain/delivery/application/repositories/recipients-repository'
 import { PrismaService } from '../prisma.service'
-import { Recipient } from '@/domain/delivery/enterprise/entities/recipent'
+import { Recipient } from '@/domain/delivery/enterprise/entities/recipient'
 import { PrismaRecipientMapper } from '../mappers/prisma-recipients-mapper'
 import { Injectable } from '@nestjs/common'
 import { PaginationParams } from '@/core/repositories/pagination-params'

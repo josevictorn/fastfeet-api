@@ -24,7 +24,7 @@ type CreateRecipientUseCaseResponse = Either<
 
 @Injectable()
 export class CreateRecipientUseCase {
-  constructor(private repicientRepository: RecipientsRepository) {}
+  constructor(private recipientsRepository: RecipientsRepository) {}
 
   async execute({
     name,
@@ -37,7 +37,7 @@ export class CreateRecipientUseCase {
     zipCode,
   }: CreateRecipientUseCaseRequest): Promise<CreateRecipientUseCaseResponse> {
     const recipientWithSameEmail =
-      await this.repicientRepository.findByEmail(email)
+      await this.recipientsRepository.findByEmail(email)
 
     if (recipientWithSameEmail) {
       return left(new RecipientAlreadyExistsError(email))
@@ -54,7 +54,7 @@ export class CreateRecipientUseCase {
       zipCode,
     })
 
-    await this.repicientRepository.create(recipient)
+    await this.recipientsRepository.create(recipient)
 
     return right({ recipient })
   }

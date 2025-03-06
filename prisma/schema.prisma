@@ -24,6 +24,7 @@ model User {
   cpf      String   @unique
   password String
   role     UserRole @default(DELIVERY_MAN)
+  Order    Order[]
 
   @@map("users")
 }
@@ -38,6 +39,41 @@ model Recipient {
   city       String
   state      String
   zipCode    String
+  orders     Order[]
 
   @@map("recipients")
+}
+
+enum OrderStatus {
+  PENDING
+  WITHDRAWN
+  DELIVERED
+  RETURNED
+}
+
+model Order {
+  id            String      @id @default(uuid())
+  code          String
+  status        OrderStatus
+  createdAt     DateTime    @default(now()) @map("created_at")
+  updatedAt     DateTime?   @updatedAt @map("updated_at")
+  recipientId   String?     @map("recipient_at")
+  deliveryManId String      @map("delivery_man_id")
+
+  attachment  Attachment?
+  recipient   Recipient?  @relation(fields: [recipientId], references: [id])
+  deliveryMan User        @relation(fields: [deliveryManId], references: [id])
+
+  @@map("orders")
+}
+
+model Attachment {
+  id      String @id @default(uuid())
+  title   String
+  url     String
+  orderId String @unique @map("order_id")
+
+  order Order @relation(fields: [orderId], references: [id])
+
+  @@map("attachments")
 }

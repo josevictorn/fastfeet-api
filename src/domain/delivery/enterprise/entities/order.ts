@@ -2,7 +2,7 @@ import { UniqueEntityID } from '@/core/entity/unique-entity-id'
 import { OrderCode } from './orderCode'
 import { OrderStatus } from '@/core/enums/order-status'
 import { Entity } from '@/core/entity/entity'
-import { Optional } from '@prisma/client/runtime/library'
+import { Optional } from '@/core/types/optional'
 
 export interface OrderProps {
   code: OrderCode
@@ -66,16 +66,19 @@ export class Order extends Entity<OrderProps> {
   }
 
   static create(
-    props: Optional<OrderProps, 'createdAt' | 'attachment' | 'deliveryManId'>,
+    props: Optional<
+      OrderProps,
+      'createdAt' | 'attachment' | 'deliveryManId' | 'code'
+    >,
     id?: UniqueEntityID,
   ) {
     const order = new Order(
       {
         ...props,
-        code: new OrderCode(),
-        createdAt: props.createdAt ?? new Date(),
+        code: props.code ?? new OrderCode(),
         attachment: props.attachment ?? null,
         deliveryManId: props.deliveryManId ?? null,
+        createdAt: props.createdAt ?? new Date(),
       },
       id,
     )

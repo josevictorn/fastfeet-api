@@ -2,7 +2,6 @@ import { InMemoryOrdersRepository } from 'test/repositories/in-memory-orders-rep
 import { OrderStatus } from '@/core/enums/order-status'
 import { makeOrder } from 'test/factories/make-order'
 import { ReturnOrderUseCase } from './return-order'
-import { makeRecipient } from 'test/factories/make-recipient'
 
 let inMemoryOrdersRepository: InMemoryOrdersRepository
 
@@ -16,16 +15,12 @@ describe('Return Order', () => {
   })
 
   it('should be able to return order', async () => {
-    const recipient = makeRecipient()
-    const order = makeOrder({
-      recipientId: recipient.id,
-    })
+    const order = makeOrder()
 
     await inMemoryOrdersRepository.create(order)
 
     const result = await sut.execute({
       orderId: order.id.toString(),
-      recipientId: recipient.id.toString(),
     })
 
     expect(result.isRight()).toBe(true)

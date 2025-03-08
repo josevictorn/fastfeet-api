@@ -15,7 +15,8 @@ export enum Action {
   Create = 'create',
   Update = 'update',
   Delete = 'delete',
-  PickUp = 'delete',
+  PickUp = 'pickUp',
+  Return = 'return',
 }
 
 export type Subjects = 'DeliveryMan' | 'Recipient' | 'Order' | 'all'
@@ -32,8 +33,10 @@ export class AbilityFactory {
     if (user.role === UserRole.ADMIN) {
       can(Action.Manage, 'DeliveryMan')
       cannot(Action.PickUp, 'DeliveryMan')
+      cannot(Action.Return, 'DeliveryMan')
       can(Action.Manage, 'Recipient')
       cannot(Action.PickUp, 'Recipient')
+      cannot(Action.Return, 'Recipient')
       can(Action.Manage, 'Order')
       cannot(Action.PickUp, 'Order')
     } else if (user.role === UserRole.DELIVERY_MAN) {

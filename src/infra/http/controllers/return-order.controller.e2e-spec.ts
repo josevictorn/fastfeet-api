@@ -43,8 +43,8 @@ describe('Pick Up Order (E2E)', () => {
     await app.init()
   })
 
-  test('A delivery man it should be able pick up order', async () => {
-    const user = await deliveryManFactory.makePrismaDeliveryMan()
+  test('An admin man it should be able mark order as returned', async () => {
+    const user = await adminFactory.makePrismaAdmin()
 
     const accessToken = jwt.sign({ sub: user.id.toString() })
 
@@ -55,7 +55,7 @@ describe('Pick Up Order (E2E)', () => {
     })
 
     const response = await request(app.getHttpServer())
-      .patch(`/orders/${order.id.toString()}/pick-up`)
+      .patch(`/orders/${order.id.toString()}/return-order`)
       .set('Authorization', `Bearer ${accessToken}`)
 
     expect(response.statusCode).toBe(204)
@@ -70,13 +70,12 @@ describe('Pick Up Order (E2E)', () => {
     expect(orderOnDatabase).toMatchObject({
       id: order.id.toString(),
       recipientId: order.recipientId.toString(),
-      deliveryManId: user.id.toString(),
-      status: OrderStatus.WITHDRAWN,
+      status: OrderStatus.RETURNED,
     })
   })
 
-  test('An admin it should not be able pick up order', async () => {
-    const user = await adminFactory.makePrismaAdmin()
+  test('A delivery man it should not be able mark order as returned', async () => {
+    const user = await deliveryManFactory.makePrismaDeliveryMan()
 
     const accessToken = jwt.sign({ sub: user.id.toString() })
 
@@ -87,7 +86,7 @@ describe('Pick Up Order (E2E)', () => {
     })
 
     const response = await request(app.getHttpServer())
-      .patch(`/orders/${order.id.toString()}/pick-up`)
+      .patch(`/orders/${order.id.toString()}/return-order`)
       .set('Authorization', `Bearer ${accessToken}`)
 
     expect(response.statusCode).toBe(403)

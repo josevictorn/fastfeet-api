@@ -4,11 +4,11 @@ import { OrdersRepository } from '../repositories/orders-repository'
 import { Injectable } from '@nestjs/common'
 import { Order } from '../../enterprise/entities/order'
 
-interface GetOrderUseCaseRequest {
+interface GetOrderByIdUseCaseRequest {
   id: string
 }
 
-type GetOrderUseCaseResponse = Either<
+type GetOrderByIdUseCaseResponse = Either<
   OrderNotFoundError,
   {
     order: Order
@@ -16,12 +16,12 @@ type GetOrderUseCaseResponse = Either<
 >
 
 @Injectable()
-export class GetOrderUseCase {
+export class GetOrderByIdUseCase {
   constructor(private ordersRepository: OrdersRepository) {}
 
   async execute({
     id,
-  }: GetOrderUseCaseRequest): Promise<GetOrderUseCaseResponse> {
+  }: GetOrderByIdUseCaseRequest): Promise<GetOrderByIdUseCaseResponse> {
     const order = await this.ordersRepository.findById(id)
 
     if (!order) {

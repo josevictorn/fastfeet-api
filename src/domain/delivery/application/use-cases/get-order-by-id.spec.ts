@@ -1,14 +1,14 @@
 import { InMemoryOrdersRepository } from 'test/repositories/in-memory-orders-repository'
-import { GetOrderUseCase } from './get-order'
+import { GetOrderByIdUseCase } from './get-order-by-id'
 import { makeOrder } from 'test/factories/make-order'
 
 let inMemoryOrdersRepository: InMemoryOrdersRepository
-let sut: GetOrderUseCase
+let sut: GetOrderByIdUseCase
 
-describe('Get Order', () => {
+describe('Get Order By Id', () => {
   beforeEach(() => {
     inMemoryOrdersRepository = new InMemoryOrdersRepository()
-    sut = new GetOrderUseCase(inMemoryOrdersRepository)
+    sut = new GetOrderByIdUseCase(inMemoryOrdersRepository)
   })
 
   it('should be able to get an order', async () => {

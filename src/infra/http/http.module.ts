@@ -36,6 +36,8 @@ import { ReturnOrderController } from './controllers/return-order.controller'
 import { ReturnOrderUseCase } from '@/domain/delivery/application/use-cases/return-order'
 import { GetOrderByIdController } from './controllers/get-order-by-id.controller'
 import { GetOrderByIdUseCase } from '@/domain/delivery/application/use-cases/get-order-by-id'
+import { FetchOrdersController } from './controllers/fetch-orders.controller'
+import { FetchOrdersUseCase } from '@/domain/delivery/application/use-cases/fetch-orders'
 
 @Module({
   imports: [DatabaseModule, CryptographyModule, PermissionsModule],
@@ -57,6 +59,7 @@ import { GetOrderByIdUseCase } from '@/domain/delivery/application/use-cases/get
     PickUpOrderController,
     ReturnOrderController,
     GetOrderByIdController,
+    FetchOrdersController,
   ],
   providers: [
     RegisterAdminUseCase,
@@ -76,6 +79,7 @@ import { GetOrderByIdUseCase } from '@/domain/delivery/application/use-cases/get
     PickUpOrderUseCase,
     ReturnOrderUseCase,
     GetOrderByIdUseCase,
+    FetchOrdersUseCase,
   ],
 })
 export class HttpModule {}

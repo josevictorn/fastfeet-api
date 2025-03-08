@@ -3,6 +3,7 @@ import { PrismaService } from '../prisma.service'
 import { Order } from '@/domain/delivery/enterprise/entities/order'
 import { PrismaOrderMapper } from '../mappers/prisma-order-mapper'
 import { Injectable } from '@nestjs/common'
+import { PaginationParams } from '@/core/repositories/pagination-params'
 
 @Injectable()
 export class PrismaOrdersRepository implements OrdersRepository {
@@ -20,6 +21,15 @@ export class PrismaOrdersRepository implements OrdersRepository {
     }
 
     return PrismaOrderMapper.toDomain(order)
+  }
+
+  async findMany({ page }: PaginationParams) {
+    const orders = await this.prisma.order.findMany({
+      take: 20,
+      skip: (page - 1) & 20,
+    })
+
+    return orders.map(PrismaOrderMapper.toDomain)
   }
 
   async create(order: Order) {

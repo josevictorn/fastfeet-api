@@ -15,6 +15,23 @@ export class InMemoryOrdersRepository implements OrdersRepository {
     return order
   }
 
+  async findMany({ page }: PaginationParams) {
+    const orders = this.items.slice((page - 1) * 20, page * 20)
+
+    return orders
+  }
+
+  async findManyByDeliveryManId(
+    deliveryManId: string,
+    { page }: PaginationParams,
+  ) {
+    const orders = this.items
+      .filter((item) => item.deliveryManId?.toString() === deliveryManId)
+      .slice((page - 1) * 20, page * 20)
+
+    return orders
+  }
+
   async create(order: Order) {
     this.items.push(order)
   }
@@ -23,11 +40,5 @@ export class InMemoryOrdersRepository implements OrdersRepository {
     const itemIndex = this.items.findIndex((item) => item.id === order.id)
 
     this.items[itemIndex] = order
-  }
-
-  async findMany({ page }: PaginationParams) {
-    const orders = this.items.slice((page - 1) * 20, page * 20)
-
-    return orders
   }
 }

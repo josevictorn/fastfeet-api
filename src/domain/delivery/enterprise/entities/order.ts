@@ -79,6 +79,7 @@ export class Order extends Entity<OrderProps> {
         attachment: props.attachment ?? null,
         deliveryManId: props.deliveryManId ?? null,
         createdAt: props.createdAt ?? new Date(),
+        updatedAt: new Date(),
       },
       id,
     )

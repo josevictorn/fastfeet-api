@@ -1,4 +1,4 @@
-import crypto from 'crypto'
+import { randomUUID } from 'node:crypto'
 
 export class OrderCode {
   private code: string
@@ -12,7 +12,8 @@ export class OrderCode {
   }
 
   constructor(code?: string) {
-    const randomBytes = crypto.randomUUID().replace(/-/g, '')
+    const randomBytes = randomUUID().replace(/-/g, '')
+
     const hexNumber = BigInt(`0x${randomBytes}`)
     const value = '#' + hexNumber.toString(36).substring(0, 8).toUpperCase()
 

@@ -1,5 +1,5 @@
 import { UniqueEntityID } from '@/core/entity/unique-entity-id'
-import { OrderCode } from './orderCode'
+import { OrderCode } from './order-code'
 import { OrderStatus } from '@/core/enums/order-status'
 import { Entity } from '@/core/entity/entity'
 import { Optional } from '@/core/types/optional'

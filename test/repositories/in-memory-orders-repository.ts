@@ -1,3 +1,4 @@
+import { PaginationParams } from '@/core/repositories/pagination-params'
 import { OrdersRepository } from '@/domain/delivery/application/repositories/orders-repository'
 import { Order } from '@/domain/delivery/enterprise/entities/order'
 
@@ -22,5 +23,11 @@ export class InMemoryOrdersRepository implements OrdersRepository {
     const itemIndex = this.items.findIndex((item) => item.id === order.id)
 
     this.items[itemIndex] = order
+  }
+
+  async findMany({ page }: PaginationParams) {
+    const orders = this.items.slice((page - 1) * 20, page * 20)
+
+    return orders
   }
 }

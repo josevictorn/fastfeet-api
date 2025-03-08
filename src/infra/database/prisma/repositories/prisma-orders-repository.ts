@@ -8,10 +8,35 @@ import { Injectable } from '@nestjs/common'
 export class PrismaOrdersRepository implements OrdersRepository {
   constructor(private prisma: PrismaService) {}
 
+  async findById(id: string): Promise<Order | null> {
+    const order = await this.prisma.order.findUnique({
+      where: {
+        id,
+      },
+    })
+
+    if (!order) {
+      return null
+    }
+
+    return PrismaOrderMapper.toDomain(order)
+  }
+
   async create(order: Order) {
     const data = PrismaOrderMapper.toPrisma(order)
 
     await this.prisma.order.create({
+      data,
+    })
+  }
+
+  async save(order: Order) {
+    const data = PrismaOrderMapper.toPrisma(order)
+
+    await this.prisma.order.update({
+      where: {
+        id: data.id,
+      },
       data,
     })
   }

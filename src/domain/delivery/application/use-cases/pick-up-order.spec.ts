@@ -1,27 +1,27 @@
 import { InMemoryOrdersRepository } from 'test/repositories/in-memory-orders-repository'
 import { OrderStatus } from '@/core/enums/order-status'
 import { InMemoryDeliveryManRepository } from 'test/repositories/in-memory-delivery-man-repository'
-import { WithdrawOrderUseCase } from './withdraw-order'
 import { makeOrder } from 'test/factories/make-order'
 import { makeDeliveryMan } from 'test/factories/make-delivery-man'
+import { PickUpOrderUseCase } from './pick-up-order'
 
 let inMemoryOrdersRepository: InMemoryOrdersRepository
 let inMemoryDeliveryManRepository: InMemoryDeliveryManRepository
 
-let sut: WithdrawOrderUseCase
+let sut: PickUpOrderUseCase
 
-describe('Withdraw Order', () => {
+describe('PickUp Order', () => {
   beforeEach(() => {
     inMemoryOrdersRepository = new InMemoryOrdersRepository()
     inMemoryDeliveryManRepository = new InMemoryDeliveryManRepository()
 
-    sut = new WithdrawOrderUseCase(
+    sut = new PickUpOrderUseCase(
       inMemoryOrdersRepository,
       inMemoryDeliveryManRepository,
     )
   })
 
-  it('should be able to change order status to withdrawn', async () => {
+  it('should be able to pick up order', async () => {
     const order = makeOrder()
 
     await inMemoryOrdersRepository.create(order)

@@ -15,6 +15,7 @@ export enum Action {
   Create = 'create',
   Update = 'update',
   Delete = 'delete',
+  PickUp = 'delete',
 }
 
 export type Subjects = 'DeliveryMan' | 'Recipient' | 'Order' | 'all'
@@ -24,18 +25,24 @@ export type AppAbility = MongoAbility<[Action, Subjects]>
 @Injectable()
 export class AbilityFactory {
   createForUser(user: any, requestParam: string) {
-    const { can, build } = new AbilityBuilder<AppAbility>(createMongoAbility)
+    const { can, cannot, build } = new AbilityBuilder<AppAbility>(
+      createMongoAbility,
+    )
 
     if (user.role === UserRole.ADMIN) {
       can(Action.Manage, 'DeliveryMan')
+      cannot(Action.PickUp, 'DeliveryMan')
       can(Action.Manage, 'Recipient')
+      cannot(Action.PickUp, 'Recipient')
       can(Action.Manage, 'Order')
-    } else if (
-      user.role === UserRole.DELIVERY_MAN &&
-      requestParam === user.id
-    ) {
-      can(Action.Read, 'DeliveryMan')
-      can(Action.Update, 'DeliveryMan')
+      cannot(Action.PickUp, 'Order')
+    } else if (user.role === UserRole.DELIVERY_MAN) {
+      if (requestParam === user.id) {
+        can(Action.Read, 'DeliveryMan')
+        can(Action.Update, 'DeliveryMan')
+      }
+
+      can(Action.PickUp, 'Order')
     }
 
     return build({

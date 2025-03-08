@@ -7,12 +7,12 @@ import { OrdersRepository } from '../repositories/orders-repository'
 import { Order } from '../../enterprise/entities/order'
 import { OrderNotFoundError } from './erros/order-not-found-error'
 
-interface WithdrawOrderUseCaseRequest {
+interface PickUpOrderUseCaseRequest {
   deliveryManId: string
   orderId: string
 }
 
-type WithdrawOrderUseCaseResponse = Either<
+type PickUpOrderUseCaseResponse = Either<
   OrderNotFoundError | DeliveryManNotFoundError,
   {
     order: Order
@@ -20,7 +20,7 @@ type WithdrawOrderUseCaseResponse = Either<
 >
 
 @Injectable()
-export class WithdrawOrderUseCase {
+export class PickUpOrderUseCase {
   constructor(
     private ordersRepository: OrdersRepository,
     private deliveryManRepository: DeliveryManRepository,
@@ -29,7 +29,7 @@ export class WithdrawOrderUseCase {
   async execute({
     deliveryManId,
     orderId,
-  }: WithdrawOrderUseCaseRequest): Promise<WithdrawOrderUseCaseResponse> {
+  }: PickUpOrderUseCaseRequest): Promise<PickUpOrderUseCaseResponse> {
     const order = await this.ordersRepository.findById(orderId)
 
     if (!order) {

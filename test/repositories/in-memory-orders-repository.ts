@@ -32,6 +32,14 @@ export class InMemoryOrdersRepository implements OrdersRepository {
     return orders
   }
 
+  async findManyByRecipientId(RecipientId: string, { page }: PaginationParams) {
+    const orders = this.items
+      .filter((item) => item.recipientId?.toString() === RecipientId)
+      .slice((page - 1) * 20, page * 20)
+
+    return orders
+  }
+
   async create(order: Order) {
     this.items.push(order)
   }

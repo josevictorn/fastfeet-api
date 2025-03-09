@@ -9,6 +9,11 @@ export abstract class OrdersRepository {
     params: PaginationParams,
   ): Promise<Order[]>
 
+  abstract findManyByRecipientId(
+    recipientId: string,
+    params: PaginationParams,
+  ): Promise<Order[]>
+
   abstract create(order: Order): Promise<void>
   abstract save(order: Order): Promise<void>
 }

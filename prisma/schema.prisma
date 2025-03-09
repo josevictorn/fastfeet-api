@@ -68,12 +68,12 @@ model Order {
 }
 
 model Attachment {
-  id      String @id @default(uuid())
+  id      String  @id @default(uuid())
   title   String
   url     String
-  orderId String @unique @map("order_id")
+  orderId String? @unique @map("order_id")
 
-  order Order @relation(fields: [orderId], references: [id])
+  order Order? @relation(fields: [orderId], references: [id])
 
   @@map("attachments")
 }

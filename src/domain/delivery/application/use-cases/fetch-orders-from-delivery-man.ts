@@ -16,7 +16,7 @@ type FetchOrdersFromDeliveryManUseCaseResponse = Either<
 >
 
 @Injectable()
-export class FetchOrdersFromDeliveryMan {
+export class FetchOrdersFromDeliveryManUseCase {
   constructor(private ordersRepository: OrdersRepository) {}
 
   async execute({

@@ -1,15 +1,15 @@
 import { InMemoryOrdersRepository } from 'test/repositories/in-memory-orders-repository'
 import { makeOrder } from 'test/factories/make-order'
-import { FetchOrdersFromDeliveryMan } from './fetch-orders-from-delivery-man'
+import { FetchOrdersFromDeliveryManUseCase } from './fetch-orders-from-delivery-man'
 import { makeDeliveryMan } from 'test/factories/make-delivery-man'
 
 let inMemoryOrdersRepository: InMemoryOrdersRepository
-let sut: FetchOrdersFromDeliveryMan
+let sut: FetchOrdersFromDeliveryManUseCase
 
 describe('Fetch Orders From Delivery Man', () => {
   beforeEach(() => {
     inMemoryOrdersRepository = new InMemoryOrdersRepository()
-    sut = new FetchOrdersFromDeliveryMan(inMemoryOrdersRepository)
+    sut = new FetchOrdersFromDeliveryManUseCase(inMemoryOrdersRepository)
   })
 
   it('should be able to fetch orders from delivery man', async () => {

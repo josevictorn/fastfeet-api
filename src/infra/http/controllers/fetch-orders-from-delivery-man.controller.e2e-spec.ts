@@ -10,10 +10,9 @@ import { DeliveryManFactory } from 'test/factories/make-delivery-man'
 import { OrderFactory } from 'test/factories/make-order'
 import { RecipientFactory } from 'test/factories/make-recipient'
 
-describe('Fetch Orders (E2E)', () => {
+describe('Fetch Orders From Delivery Man (E2E)', () => {
   let app: INestApplication
   let deliveryManFactory: DeliveryManFactory
-  let adminFactory: AdminFactory
   let recipientFactory: RecipientFactory
   let orderFactory: OrderFactory
   let jwt: JwtService
@@ -32,7 +31,6 @@ describe('Fetch Orders (E2E)', () => {
     app = moduleRef.createNestApplication()
 
     deliveryManFactory = moduleRef.get(DeliveryManFactory)
-    adminFactory = moduleRef.get(AdminFactory)
     orderFactory = moduleRef.get(OrderFactory)
     recipientFactory = moduleRef.get(RecipientFactory)
     jwt = moduleRef.get(JwtService)
@@ -40,8 +38,8 @@ describe('Fetch Orders (E2E)', () => {
     await app.init()
   })
 
-  test('An admin it should be able fetch orders', async () => {
-    const user = await adminFactory.makePrismaAdmin()
+  test('An delivery man it should be able fetch your orders', async () => {
+    const user = await deliveryManFactory.makePrismaDeliveryMan()
 
     const accessToken = jwt.sign({ sub: user.id.toString() })
 
@@ -51,19 +49,22 @@ describe('Fetch Orders (E2E)', () => {
       orderFactory.makePrismaOrder({
         code: new OrderCode('#123ABC45'),
         recipientId: recipient.id,
+        deliveryManId: user.id,
       }),
       orderFactory.makePrismaOrder({
         code: new OrderCode('#789ABC10'),
         recipientId: recipient.id,
+        deliveryManId: user.id,
       }),
       orderFactory.makePrismaOrder({
         code: new OrderCode('#111ABC21'),
         recipientId: recipient.id,
+        deliveryManId: user.id,
       }),
     ])
 
     const response = await request(app.getHttpServer())
-      .get('/orders')
+      .get('/delivery-man/orders')
       .set('Authorization', `Bearer ${accessToken}`)
       .send()
 
@@ -83,8 +84,10 @@ describe('Fetch Orders (E2E)', () => {
     })
   })
 
-  test('An delivery man it should not be able fetch orders', async () => {
+  test('An delivery man it should not be able fetch orders of others delivery man', async () => {
     const user = await deliveryManFactory.makePrismaDeliveryMan()
+
+    const deliveryMan = await deliveryManFactory.makePrismaDeliveryMan()
 
     const accessToken = jwt.sign({ sub: user.id.toString() })
 
@@ -94,18 +97,23 @@ describe('Fetch Orders (E2E)', () => {
       orderFactory.makePrismaOrder({
         code: new OrderCode('#123ABC45'),
         recipientId: recipient.id,
+        deliveryManId: deliveryMan.id,
       }),
       orderFactory.makePrismaOrder({
         code: new OrderCode('#789ABC10'),
         recipientId: recipient.id,
+        deliveryManId: deliveryMan.id,
       }),
     ])
 
     const response = await request(app.getHttpServer())
-      .get('/orders')
+      .get('/delivery-man/orders')
       .set('Authorization', `Bearer ${accessToken}`)
       .send()
 
-    expect(response.statusCode).toBe(403)
+    expect(response.statusCode).toBe(200)
+    expect(response.body).toEqual({
+      orders: [],
+    })
   })
 })

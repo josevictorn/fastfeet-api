@@ -1,9 +1,12 @@
 import { PaginationParams } from '@/core/repositories/pagination-params'
+import { OrderAttachmentsRepository } from '@/domain/delivery/application/repositories/order-attachments-repository'
 import { OrdersRepository } from '@/domain/delivery/application/repositories/orders-repository'
 import { Order } from '@/domain/delivery/enterprise/entities/order'
 
 export class InMemoryOrdersRepository implements OrdersRepository {
   public items: Order[] = []
+
+  constructor(private orderAttachmentsRepository: OrderAttachmentsRepository) {}
 
   async findById(id: string) {
     const order = this.items.find((item) => item.id.toString() === id)
@@ -46,6 +49,10 @@ export class InMemoryOrdersRepository implements OrdersRepository {
 
   async save(order: Order) {
     const itemIndex = this.items.findIndex((item) => item.id === order.id)
+
+    if (order.attachment) {
+      await this.orderAttachmentsRepository.create(order.attachment)
+    }
 
     this.items[itemIndex] = order
   }

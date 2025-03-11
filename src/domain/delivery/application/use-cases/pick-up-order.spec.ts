@@ -4,7 +4,9 @@ import { InMemoryDeliveryManRepository } from 'test/repositories/in-memory-deliv
 import { makeOrder } from 'test/factories/make-order'
 import { makeDeliveryMan } from 'test/factories/make-delivery-man'
 import { PickUpOrderUseCase } from './pick-up-order'
+import { InMemoryOrderAttachmentsRepository } from 'test/repositories/in-memory-order-attachments-repository'
 
+let inMemoryOrderAttachmentsRepository: InMemoryOrderAttachmentsRepository
 let inMemoryOrdersRepository: InMemoryOrdersRepository
 let inMemoryDeliveryManRepository: InMemoryDeliveryManRepository
 
@@ -12,7 +14,11 @@ let sut: PickUpOrderUseCase
 
 describe('PickUp Order', () => {
   beforeEach(() => {
-    inMemoryOrdersRepository = new InMemoryOrdersRepository()
+    inMemoryOrderAttachmentsRepository =
+      new InMemoryOrderAttachmentsRepository()
+    inMemoryOrdersRepository = new InMemoryOrdersRepository(
+      inMemoryOrderAttachmentsRepository,
+    )
     inMemoryDeliveryManRepository = new InMemoryDeliveryManRepository()
 
     sut = new PickUpOrderUseCase(

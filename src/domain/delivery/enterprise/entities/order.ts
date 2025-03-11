@@ -1,20 +1,21 @@
 import { UniqueEntityID } from '@/core/entity/unique-entity-id'
 import { OrderCode } from './order-code'
 import { OrderStatus } from '@/core/enums/order-status'
-import { Entity } from '@/core/entity/entity'
 import { Optional } from '@/core/types/optional'
+import { AggregateRoot } from '@/core/entity/aggregate-root'
+import { OrderAttachment } from './order-attachment'
 
 export interface OrderProps {
   code: OrderCode
   deliveryManId: UniqueEntityID | null
   recipientId: UniqueEntityID
   status: keyof typeof OrderStatus
-  attachment: string | null
+  attachment: OrderAttachment | null
   createdAt: Date
   updatedAt?: Date | null
 }
 
-export class Order extends Entity<OrderProps> {
+export class Order extends AggregateRoot<OrderProps> {
   get code() {
     return this.props.code
   }
@@ -56,7 +57,7 @@ export class Order extends Entity<OrderProps> {
     this.touch()
   }
 
-  set attachment(attachment: string | null) {
+  set attachment(attachment: OrderAttachment | null) {
     this.props.attachment = attachment
     this.touch()
   }

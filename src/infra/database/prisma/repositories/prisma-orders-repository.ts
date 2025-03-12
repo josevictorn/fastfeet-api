@@ -4,10 +4,14 @@ import { Order } from '@/domain/delivery/enterprise/entities/order'
 import { PrismaOrderMapper } from '../mappers/prisma-order-mapper'
 import { Injectable } from '@nestjs/common'
 import { PaginationParams } from '@/core/repositories/pagination-params'
+import { OrderAttachmentsRepository } from '@/domain/delivery/application/repositories/order-attachments-repository'
 
 @Injectable()
 export class PrismaOrdersRepository implements OrdersRepository {
-  constructor(private prisma: PrismaService) {}
+  constructor(
+    private prisma: PrismaService,
+    private orderAttachmentsRepository: OrderAttachmentsRepository,
+  ) {}
 
   async findById(id: string): Promise<Order | null> {
     const order = await this.prisma.order.findUnique({
@@ -73,11 +77,15 @@ export class PrismaOrdersRepository implements OrdersRepository {
   async save(order: Order) {
     const data = PrismaOrderMapper.toPrisma(order)
 
-    await this.prisma.order.update({
-      where: {
-        id: data.id,
-      },
-      data,
-    })
+    await Promise.all([
+      this.prisma.order.update({
+        where: {
+          id: data.id,
+        },
+        data,
+      }),
+      order.attachment &&
+        this.orderAttachmentsRepository.create(order.attachment),
+    ])
   }
 }

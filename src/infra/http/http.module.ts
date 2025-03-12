@@ -45,6 +45,8 @@ import { FetchOrdersFromRecipientUseCase } from '@/domain/delivery/application/u
 import { StorageModule } from '../storage/storage.module'
 import { UploadAndCreateAttachmentUseCase } from '@/domain/delivery/application/use-cases/upload-and-create-attachment'
 import { UploadAttachmentController } from './controllers/upload-attachment.controller'
+import { DeliverOrderController } from './controllers/deliver-order.controller'
+import { DeliverOrderUseCase } from '@/domain/delivery/application/use-cases/deliver-order'
 
 @Module({
   imports: [
@@ -75,6 +77,7 @@ import { UploadAttachmentController } from './controllers/upload-attachment.cont
     FetchOrdersFromDeliveryManController,
     FetchOrdersFromRecipientController,
     UploadAttachmentController,
+    DeliverOrderController,
   ],
   providers: [
     RegisterAdminUseCase,
@@ -98,6 +101,7 @@ import { UploadAttachmentController } from './controllers/upload-attachment.cont
     FetchOrdersFromDeliveryManUseCase,
     FetchOrdersFromRecipientUseCase,
     UploadAndCreateAttachmentUseCase,
+    DeliverOrderUseCase,
   ],
 })
 export class HttpModule {}

@@ -1,7 +1,7 @@
 import { Entity } from '@/core/entity/entity'
 import { UniqueEntityID } from '@/core/entity/unique-entity-id'
 
-interface OrderAttachmentProps {
+export interface OrderAttachmentProps {
   orderId: UniqueEntityID
   attachmentId: UniqueEntityID
 }

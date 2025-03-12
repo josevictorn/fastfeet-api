@@ -17,6 +17,7 @@ export enum Action {
   Delete = 'delete',
   PickUp = 'pickUp',
   Return = 'return',
+  Deliver = 'deliver',
 }
 
 export type Subjects = 'DeliveryMan' | 'Recipient' | 'Order' | 'all'
@@ -34,11 +35,14 @@ export class AbilityFactory {
       can(Action.Manage, 'DeliveryMan')
       cannot(Action.PickUp, 'DeliveryMan')
       cannot(Action.Return, 'DeliveryMan')
+      cannot(Action.Deliver, 'DeliveryMan')
       can(Action.Manage, 'Recipient')
       cannot(Action.PickUp, 'Recipient')
       cannot(Action.Return, 'Recipient')
+      cannot(Action.Deliver, 'Recipient')
       can(Action.Manage, 'Order')
       cannot(Action.PickUp, 'Order')
+      cannot(Action.Deliver, 'Order')
     } else if (user.role === UserRole.DELIVERY_MAN) {
       if (requestParam === user.id) {
         can(Action.Read, 'DeliveryMan')
@@ -46,6 +50,7 @@ export class AbilityFactory {
       }
 
       can(Action.PickUp, 'Order')
+      can(Action.Deliver, 'Order')
     }
 
     return build({

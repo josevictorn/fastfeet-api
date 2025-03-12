@@ -28,6 +28,10 @@ export class DeliveryMan extends Entity<DeliveryManProps> {
     this.props.cpf = cpf
   }
 
+  set password(password: string) {
+    this.props.password = password
+  }
+
   static create(props: DeliveryManProps, id?: UniqueEntityID) {
     const deliveryMan = new DeliveryMan(props, id)
 

@@ -38,7 +38,7 @@ export class ChangeDeliveryManPasswordUseCase {
 
     deliveryMan.password = hashedPassword
 
-    await this.deliveryManRepository.create(deliveryMan)
+    await this.deliveryManRepository.save(deliveryMan)
 
     return right({
       deliveryMan,

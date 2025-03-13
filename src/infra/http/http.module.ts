@@ -49,6 +49,8 @@ import { DeliverOrderController } from './controllers/deliver-order.controller'
 import { DeliverOrderUseCase } from '@/domain/delivery/application/use-cases/deliver-order'
 import { ChangeAdminPasswordController } from './controllers/change-admin-password.controller'
 import { ChangeAdminPasswordUseCase } from '@/domain/delivery/application/use-cases/change-admin-password'
+import { ChangeDeliveryManPasswordUseCase } from '@/domain/delivery/application/use-cases/change-delivery-man-password'
+import { ChangeDeliveryManPasswordController } from './controllers/change-delivery-man-password.controller'
 
 @Module({
   imports: [
@@ -81,6 +83,7 @@ import { ChangeAdminPasswordUseCase } from '@/domain/delivery/application/use-ca
     UploadAttachmentController,
     DeliverOrderController,
     ChangeAdminPasswordController,
+    ChangeDeliveryManPasswordController,
   ],
   providers: [
     RegisterAdminUseCase,
@@ -106,6 +109,7 @@ import { ChangeAdminPasswordUseCase } from '@/domain/delivery/application/use-ca
     UploadAndCreateAttachmentUseCase,
     DeliverOrderUseCase,
     ChangeAdminPasswordUseCase,
+    ChangeDeliveryManPasswordUseCase,
   ],
 })
 export class HttpModule {}

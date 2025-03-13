@@ -47,6 +47,8 @@ import { UploadAndCreateAttachmentUseCase } from '@/domain/delivery/application/
 import { UploadAttachmentController } from './controllers/upload-attachment.controller'
 import { DeliverOrderController } from './controllers/deliver-order.controller'
 import { DeliverOrderUseCase } from '@/domain/delivery/application/use-cases/deliver-order'
+import { ChangeAdminPasswordController } from './controllers/change-admin-password.controller'
+import { ChangeAdminPasswordUseCase } from '@/domain/delivery/application/use-cases/change-admin-password'
 
 @Module({
   imports: [
@@ -78,6 +80,7 @@ import { DeliverOrderUseCase } from '@/domain/delivery/application/use-cases/del
     FetchOrdersFromRecipientController,
     UploadAttachmentController,
     DeliverOrderController,
+    ChangeAdminPasswordController,
   ],
   providers: [
     RegisterAdminUseCase,
@@ -102,6 +105,7 @@ import { DeliverOrderUseCase } from '@/domain/delivery/application/use-cases/del
     FetchOrdersFromRecipientUseCase,
     UploadAndCreateAttachmentUseCase,
     DeliverOrderUseCase,
+    ChangeAdminPasswordUseCase,
   ],
 })
 export class HttpModule {}

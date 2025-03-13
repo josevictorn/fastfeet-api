@@ -38,7 +38,7 @@ export class ChangeAdminPasswordUseCase {
 
     admin.password = hashedPassword
 
-    await this.adminsRepository.create(admin)
+    await this.adminsRepository.save(admin)
 
     return right({
       admin,

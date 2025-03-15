@@ -1,3 +1,4 @@
+import { DomainEvents } from '@/core/events/domain-events'
 import { PaginationParams } from '@/core/repositories/pagination-params'
 import { OrderAttachmentsRepository } from '@/domain/delivery/application/repositories/order-attachments-repository'
 import { OrdersRepository } from '@/domain/delivery/application/repositories/orders-repository'
@@ -55,5 +56,7 @@ export class InMemoryOrdersRepository implements OrdersRepository {
     }
 
     this.items[itemIndex] = order
+
+    DomainEvents.dispatchEventsForAggregate(order.id)
   }
 }

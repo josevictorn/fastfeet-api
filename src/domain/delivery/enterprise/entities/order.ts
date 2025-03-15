@@ -4,6 +4,7 @@ import { OrderStatus } from '@/core/enums/order-status'
 import { Optional } from '@/core/types/optional'
 import { AggregateRoot } from '@/core/entity/aggregate-root'
 import { OrderAttachment } from './order-attachment'
+import { OrderStatusUpdatedEvent } from '../events/order-status-updated-event'
 
 export interface OrderProps {
   code: OrderCode
@@ -53,6 +54,9 @@ export class Order extends AggregateRoot<OrderProps> {
   }
 
   set status(status: keyof typeof OrderStatus) {
+    if (status !== this.props.status) {
+      this.addDomainEvent(new OrderStatusUpdatedEvent(this))
+    }
     this.props.status = status
     this.touch()
   }

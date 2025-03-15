@@ -167,5 +167,5 @@ Para dúvidas ou sugestões, entre em contato através de:
 
 ## Autor
 
-Feito com amor por [@josevictorn](https://github.com/josevictorn)
+Feito por [@josevictorn](https://github.com/josevictorn)
 

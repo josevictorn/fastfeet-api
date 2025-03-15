@@ -2,7 +2,7 @@
 
 API para controle de encomendas de uma transportadora fictícia, a FastFeet.
 
-## 📜 Índice
+## Índice
 
 1. [Sobre o projeto](#sobre-o-projeto)
 2. [Tecnologias utilizadas](#tecnologias-utilizadas)
@@ -15,7 +15,7 @@ API para controle de encomendas de uma transportadora fictícia, a FastFeet.
 9. [Contato](#contato)
 10. [Autor](#autor)
 
-## 📝 Sobre o projeto
+## Sobre o projeto
 
 O **FastFeet** é uma API desenvolvida para gerenciar o fluxo de encomendas de uma transportadora fictícia. A aplicação permite que administradores cadastrem entregadores, clientes e encomendas, garantindo um controle eficiente das operações logísticas.
 
@@ -35,11 +35,11 @@ A API foi projetada para ser utilizada por:
 - Administradores da transportadora, que gerenciam entregadores e encomendas.
 - Entregadores, que podem visualizar suas encomendas e registrar entregas ou problemas.
 
-## 🛠️ Tecnologias utilizadas
+## Tecnologias utilizadas
 
 O projeto foi desenvolvido com as seguintes tecnologias:
 
-### 🏗️ Backend
+### 🏗 Backend
 - **Node.js** - Plataforma utilizada para execução do código JavaScript no servidor.
 - **NestJS** - Framework para construção de APIs escaláveis e modulares.
 
@@ -66,14 +66,14 @@ O projeto foi desenvolvido com as seguintes tecnologias:
 ### 📖 Documentação
 - **Swagger** - Para geração da documentação da API.
 
-## 📚 Conceitos aplicados
+## Conceitos aplicados
 
 - DDD, Domain Events, Clean Architecture
 - Autenticação e Autorização (RBAC e ABAC)
 - Testes unitários e e2e
 - Integração com serviços externos
 
-## ⚖️ Casos de uso
+## Casos de uso
 
 - A aplicação deve ter dois tipos de usuário, entregador e/ou admin
 - Deve ser possível realizar login com CPF e Senha
@@ -89,7 +89,7 @@ O projeto foi desenvolvido com as seguintes tecnologias:
 - Deve ser possível listar as entregas de um usuário
 - Deve ser possível notificar o destinatário a cada alteração no status da encomenda
 
-## ⚖️ Regras de negócio
+## Regras de negócio
 
 - Somente usuário do tipo admin pode realizar operações de CRUD nas encomendas
 - Somente usuário do tipo admin pode realizar operações de CRUD dos entregadores
@@ -99,7 +99,7 @@ O projeto foi desenvolvido com as seguintes tecnologias:
 - Somente o admin pode alterar a senha de um usuário
 - Não deve ser possível um entregador listar as encomendas de outro entregador
 
-## ⚙️ Instalação e configuração
+## Instalação e configuração
 
 Passos para configurar o ambiente local:
 
@@ -137,7 +137,7 @@ Passos para configurar o ambiente local:
    npm run start:dev
    ```
 
-## 📄 Documentação da API (Swagger)
+## Documentação da API (Swagger)
 
 A documentação completa dos endpoints da API está disponível via Swagger. Para acessá-la:
 
@@ -148,7 +148,7 @@ A documentação completa dos endpoints da API está disponível via Swagger. Pa
    ```
 3. Explore os endpoints, visualize os modelos de requisição e resposta, e teste as chamadas diretamente na interface.
 
-## 🧪 Testes
+## Testes
 
 - Para executar os testes unitários, utilize o seguinte comando:
   ```sh

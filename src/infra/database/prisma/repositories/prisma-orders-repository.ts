@@ -5,6 +5,7 @@ import { PrismaOrderMapper } from '../mappers/prisma-order-mapper'
 import { Injectable } from '@nestjs/common'
 import { PaginationParams } from '@/core/repositories/pagination-params'
 import { OrderAttachmentsRepository } from '@/domain/delivery/application/repositories/order-attachments-repository'
+import { DomainEvents } from '@/core/events/domain-events'
 
 @Injectable()
 export class PrismaOrdersRepository implements OrdersRepository {
@@ -87,5 +88,7 @@ export class PrismaOrdersRepository implements OrdersRepository {
       order.attachment &&
         this.orderAttachmentsRepository.create(order.attachment),
     ])
+
+    DomainEvents.dispatchEventsForAggregate(order.id)
   }
 }
